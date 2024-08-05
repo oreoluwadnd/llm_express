@@ -7,6 +7,7 @@ import { errorHandler } from "./error/ErrorHandler";
 import { AppError, HttpCode } from "./error/AppError";
 // No type defintions available for package 'xss-clean'
 // @ts-ignore
+import conversationRoutes from "./routes/conversationRoutes";
 import xss from "xss-clean";
 import cors from "cors";
 import "dotenv/config";
@@ -50,6 +51,8 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
     isOperational: false,
   });
 });
+
+app.use('/api', conversationRoutes);
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   errorHandler.handleError(err, res);
 });
